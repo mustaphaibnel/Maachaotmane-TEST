@@ -2,6 +2,10 @@ calculate:
    path: /calculate
    controller: App\Controller\CalculatorController::calculate
    methods: ['POST']
+history:
+    path: /history
+    controller: App\Controller\CalculatorController::history
+    methods: []
 app.swagger_ui:
     path: /api/doc
     methods: GET

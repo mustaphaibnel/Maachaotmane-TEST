@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DAO\CalculationHistoryDAO;
 use App\DTO\CalculationRequestDTO;
 use App\Service\CalculatorService;
 use App\Transformer\CalculationResultTransformer;
@@ -33,6 +34,22 @@ class CalculatorController extends AbstractController
        {
         return new JsonResponse(['error' => $e->getMessage()], 400);
        }
+    }
+
+    public function history(CalculationHistoryDAO $historyDAO): JsonResponse
+    {
+        $histories = $historyDAO->getAll();
+
+        $data = array_map(function ($history) {
+            return [
+                'operation' => $history->getOperation(),
+                'a' => $history->getA(),
+                'b' => $history->getB(),
+                'result' => $history->getResult(),
+            ];
+        }, $histories);
+
+        return new JsonResponse($data);
     }
 
 }
