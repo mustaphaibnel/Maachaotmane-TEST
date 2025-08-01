@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+/zsh.exe.stackdump
 /.env.local
 /.env.local.php
 /.env.*.local

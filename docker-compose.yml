@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # PHP-FPM service for the Symfony application
+  app:
+    build: .
+    ports: ["8000:8000"]
+    container_name: symfony_php
+    volumes:
+      - ./:/var/www # Mount your Symfony project into the container
+    depends_on:
+      - database
+    command:
+      - php -S 0.0.0.0:8000 -t public
+
+  # Database service (e.g., MySQL)
+  database:
+    image: postgres:13
+    container_name: symfony_db
+    environment:
+      POSTGRES_DB: symfony_db
+      POSTGRES_USER: symfony_user
+      POSTGRES_PASSWORD: symfony_password
+    ports: ["5432:5432"]
